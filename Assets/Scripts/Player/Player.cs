@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Adding required components
+[RequireComponent(typeof(Shooter))]
+[RequireComponent(typeof(PlayerMovement))]
+
+/* 
+ * Player Script. This handles player information and states.
+ * This handles player interaction with environment based on
+ * what's currently held.
+ * 
+ * TODO Handle harvesting
+ * TODO Handle feeding
+ * TODO Handle taking medice/ giving medicine to animals
+ * TODO Handle fixing fences
+ */ 
 public class Player : Character {
 
     public enum PlayerState {healthy, infected}
@@ -25,6 +39,7 @@ public class Player : Character {
         inv = new Inventory(ConstantVariables.INVENTORYSLOTS);
         shootScript = this.GetComponent<Shooter>();
         movementScript = this.GetComponent<PlayerMovement>();
+
         playerState = PlayerState.healthy;
 	}
 	

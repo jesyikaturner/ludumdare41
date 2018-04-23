@@ -22,6 +22,9 @@ GameObject:
   - component: {fileID: 212387395050058888}
   - component: {fileID: 50409995079978974}
   - component: {fileID: 61577062115283726}
+  - component: {fileID: 114042735036064240}
+  - component: {fileID: 114851287983966434}
+  - component: {fileID: 114712622661547192}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -87,6 +90,54 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &114042735036064240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364946906221024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2663a942fab49a98f4e97ed5c4f61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Player
+  maxHealth: 100
+  currHealth: 100
+  characterSpeed: 7
+  playerState: 0
+  maxStamina: 100
+  currStamina: 100
+  currMoney: 0
+  shootScript: {fileID: 0}
+  movementScript: {fileID: 0}
+--- !u!114 &114712622661547192
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364946906221024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f128aac4179554449a083a796647b25f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  shootingSpeed: 2
+  timeBetweenBullets: 0.15
+  isShooting: 0
+--- !u!114 &114851287983966434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364946906221024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fd75a99b2f644a59e636ac720f922d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
 --- !u!212 &212387395050058888
 SpriteRenderer:
   m_ObjectHideFlags: 1

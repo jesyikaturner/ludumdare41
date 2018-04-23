@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour {
 
+    /*
+     * Populates shop with possible stock. Stocks shop inventory.
+     * Clears stock and restocks. Handles selling and buying.
+     */
+
     public List<Item> items; // A copy of the item database.
     public List<ItemContainer> possibleStock;
     public Inventory inv;
@@ -11,6 +16,7 @@ public class Shop : MonoBehaviour {
     public Shop(){
         inv = new Inventory(ConstantVariables.INVENTORYSLOTS);
         possibleStock = new List<ItemContainer>();
+
     }
 
     // player selling an item - takes an reference of the player to access their variables
@@ -28,31 +34,66 @@ public class Shop : MonoBehaviour {
 
     // player buying and item - takes an reference of the player to access their variables
     public void BuyItem(Player p, int id){
-        if(p.currMoney > (p.currMoney - inv.findItem(id).price)){
-            
+        // TODO
+    }
+
+    /* 
+     * Seperates possible stock into regular and special items.
+     * Chooses one special item and four regular. Adds them to
+     * shop inventory.
+    */
+    public void Stock(){
+        List<ItemContainer> regular = new List<ItemContainer>();
+        List<ItemContainer> special = new List<ItemContainer>();
+
+        foreach(ItemContainer ic in possibleStock){
+            if(ic.price >= 50){
+                special.Add(ic);
+                //Debug.Log("Special" + ic.PrintToString());
+            }else{
+                regular.Add(ic);
+                //Debug.Log("Regular" + ic.PrintToString());
+            }
+        }
+
+        // add 1 random special to inventory
+        RandomAdd(special,1);
+
+        // add 4 random regular to inventory
+        RandomAdd(regular,4);
+    }
+
+    private void RandomAdd(List<ItemContainer> itemToAdd, int howMany){
+        int random = Random.Range(0,itemToAdd.Count);
+        for(int i = 0; i < howMany; i++){
+            ItemContainer temp = itemToAdd[random];
+
+            while(inv.findItem(temp) != null){
+                random = Random.Range(0,itemToAdd.Count);
+                temp = itemToAdd[random];
+                if(inv.findItem(temp) == null)
+                    break;
+            }
+
+            inv.addItem(itemToAdd[random]);
+
         }
     }
 
-    public void Stock(){
-
-    }
-    public void ClearStock(){
-
+    // Clears inventory then adds more stock.
+    public void Restock(){
+        inv.ClearInventory();
+        Stock();
     }
         
     public void CreatePossibleStock(){
         foreach(Item item in items){
-            if(item.price > 0){
-                possibleStock.Add(createItemContainer(item,Random.Range(20,40)));
-            }else if (item.price > 50) {
-                possibleStock.Add(createItemContainer(item,Random.Range(1,5)));
+            if(item.price < 50 && item.price > 0){
+                possibleStock.Add(UtilityMethods.createItemContainer(item,Random.Range(20,40)));
+            }else if (item.price >= 50){
+                possibleStock.Add(UtilityMethods.createItemContainer(item,Random.Range(1,5)));
             }
         }
-    }
-
-    // Adds a quantity to the item.
-    private ItemContainer createItemContainer(Item item, int value){
-        return new ItemContainer(item.name, item.id, value, item.price);
     }
 
     // testing iventory management.

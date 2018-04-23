@@ -47,10 +47,20 @@ public class Inventory {
         }
         return null;
     }
+
+    public ItemContainer findItem(ItemContainer item){
+        foreach(ItemContainer obj in items){
+            if (obj == item)
+                return obj;
+        }
+        return null;
+    }
+
     public ItemContainer getItemFromIndex(int index){
         return items[index];
     }
 
+    // is this used?
     public int GetValue(int index){
         if(items[index] == null)
             return 0;
@@ -58,6 +68,7 @@ public class Inventory {
             return 0;
         return items[index].value;
     }
+
 
     public bool RemoveItem(int id){
         for(int i = 0; i < items.Length; i++){
@@ -86,8 +97,15 @@ public class Inventory {
         return false;
     }
 
+    public void ClearInventory(){
+        for(int i = 0; i < items.Length; i++){
+            items[i] = null;
+        }
+    }
+
     // for testing purposes
     public void printInventory(){
+        
         foreach(ItemContainer obj in items){
             if(obj != null)
                 Debug.Log(obj.PrintToString());

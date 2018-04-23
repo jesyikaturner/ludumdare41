@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ShopHUDHandler : MonoBehaviour {
 
-    public enum State{buy, sell}
-    public State state;
-    public List<ItemType> items = new List<ItemType>();
+    /*
+     * TODO create quantity fields and item images from shop inventory.
+     * TODO create inventory fields and item images from player inventory.
+     */ 
+
+    public List<ItemType> items = new List<ItemType>(); // holds id and quantity to send off to the shop script
 
     public Manager gm;
 
@@ -20,18 +23,6 @@ public class ShopHUDHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        switch(state){
-            case State.buy:
-                Debug.Log("currently in buy mode.");
-                break;
-
-            case State.sell:
-                Debug.Log("currently in sell mide");
-                break;
-            default:
-                Debug.Log("State has been incorrectly set. Neither in buy or sell mode.");
-                break;
-        }
 	}
 
     public void bullet_Field(string text){
@@ -95,16 +86,6 @@ public class ShopHUDHandler : MonoBehaviour {
             }
         }
     }
-
-    /*
-    public void ID_Field(string newText){
-        id = int.Parse(newText);
-    }
-
-    public void Quantity_Field(string newText){
-        quantity = int.Parse(newText);
-    }*/
-
 
 }
 

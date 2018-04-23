@@ -8,7 +8,6 @@ public class Manager : MonoBehaviour {
     public States state;
 
     public List<Item> itemList; // keeps track of items
-    public List<ItemContainer> itemContainerList; // keeps track of items with prices
 
     public Player p;
     public Shop s;
@@ -16,11 +15,19 @@ public class Manager : MonoBehaviour {
     public Queue enemyQueue;
     public Queue animalQueue;
 
-    // menu hud
-    // hud
-    // shop hud
-    // death hud
+    void Start () {
+        p = GameObject.Find("Player").GetComponent<Player>();
 
+        // Setting up item database and shop.
+        itemList = new List<Item>();
+        CreateItemDatabase();
+        CreateShop();
+
+        // Adding necessary items to the player's inventory
+        SetupPlayerInventory();
+
+        state = States.shop;
+    }
 
     public void CreateItemDatabase(){
         // NAME : ID : PRICE
@@ -29,18 +36,17 @@ public class Manager : MonoBehaviour {
         itemList.Add(createItem("Seeds", 3, 1));
         itemList.Add(createItem("Medicine", 4, 100));
         itemList.Add(createItem("Wood",5, 10));
-        itemList.Add(createItem("Gun",6,0));
+        itemList.Add(createItem("Gun",6,0)); // Necessary Player Item
         itemList.Add(createItem("Growth Potion",7,50));
         itemList.Add(createItem("Stamina Potion",8,25));
-        itemList.Add(createItem("Bandages",8,25));
+        itemList.Add(createItem("Bandages",9,25));
+        itemList.Add(createItem("Sickle",10,0)); // Necessary Player Item
     }
 
     private Item createItem(string name, int id, int price){
         return new Item(name, id, price);
     }
-    private ItemContainer createItemContainer(Item item, int value){
-        return new ItemContainer(item.name, item.id, value, item.price);
-    }
+
 
     public void Menu(){
 
@@ -54,26 +60,18 @@ public class Manager : MonoBehaviour {
         s = shop.GetComponent<Shop>();
 
         s.items = itemList;
+
+        s.CreatePossibleStock();
+        s.Stock();
+        s.inv.printInventory();
     }
 
-
-    public void CreateZombie(string name , int id, int health, int attack, int speed){
+    public void SetupPlayerInventory(){
+        p.inv.addItem(UtilityMethods.createItemContainer(itemList[5],1));
+        p.inv.addItem(UtilityMethods.createItemContainer(itemList[0],10));
+        p.inv.addItem(UtilityMethods.createItemContainer(itemList[9],1));
 
     }
-
-	// Use this for initialization
-	void Start () {
-        state = States.shop;
-        itemList = new List<Item>();
-        itemContainerList = new List<ItemContainer>();
-        CreateItemDatabase();
-        //CreatePlayer("Player");
-        p = GameObject.Find("Player").GetComponent<Player>();
-        p.inv.addItem(new ItemContainer("Gun",6,1,0));
-        p.inv.addItem(createItemContainer(itemList[0],10));
-
-        CreateShop();
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -96,4 +94,11 @@ public class Manager : MonoBehaviour {
 
 public class ConstantVariables {
     public static int INVENTORYSLOTS = 5;
+    public static int STORAGESLOTS = 10;
+}
+
+public class UtilityMethods {
+    public static ItemContainer createItemContainer(Item item, int value){
+        return new ItemContainer(item.name, item.id, value, item.price);
+    }
 }
