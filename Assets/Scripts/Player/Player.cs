@@ -58,11 +58,11 @@ public class Player : Character {
         */
         switch(playerState){
             case PlayerState.HEALTHY:
-                if(this.currStamina < maxStamina+1)
-                    this.currStamina += Time.deltaTime;
+                if(currStamina < maxStamina+1)
+                    currStamina += Time.deltaTime;
                 break;
             case PlayerState.INFECTED:
-                if(this.currStamina > 0)
+                if(currStamina > 0)
                     if (!LoseStamina(1f))
                     {
                         // Player will die. I guess?
@@ -152,8 +152,8 @@ public class Player : Character {
     }
 
     private bool LoseStamina(float amount){
-        if(this.currStamina > 0){
-            this.currStamina -= amount;
+        if(currStamina > 0){
+            currStamina -= amount;
             return true;
         }else{
             Debug.Log("Character passes out or is unable to move til stamina refills");
