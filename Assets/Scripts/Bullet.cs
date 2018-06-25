@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour {
         }
         if(other.gameObject.name == "Player"){
             //Debug.Log("IS HITTING PLAYER");
-            other.transform.GetComponentInParent<Player>().takeDamage(damage);
+            other.transform.GetComponentInParent<Player>().TakeDamage(damage);
             Destroy(this.gameObject);
         }
     }

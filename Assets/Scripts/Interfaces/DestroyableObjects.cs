@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface DestroyableObjects {
 
-    void takeDamage(float damage);
-    void destroySelf();
+    void TakeDamage(float damage);
+    void DestroySelf();
 }

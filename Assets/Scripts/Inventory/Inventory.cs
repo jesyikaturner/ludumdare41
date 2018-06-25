@@ -100,7 +100,7 @@ public class Inventory {
      * -----------
      */
 
-    public bool RemoveItem(int id){
+    public bool RemoveItemById(int id){
         for(int i = 0; i < items.Length; i++){
             if(items[i].Id == id){
                 items[i] = null;
@@ -121,7 +121,7 @@ public class Inventory {
                i.Value -= quantity;
                 return true;
             }else{
-                RemoveItem(id);
+                RemoveItemById(id);
             }
         }
         return false;

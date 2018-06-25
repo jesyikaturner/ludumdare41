@@ -15,13 +15,11 @@ using UnityEngine;
  * 
  * TODO Handle harvesting
  * TODO Handle feeding
- * TODO Handle taking medice/ giving medicine to animals
+ * TODO Handle giving medicine to animals
  * TODO Handle fixing fences
+ * TODO Handle planting seeds
  */ 
 public class Player : Character {
-
-    public enum PlayerState {HEALTHY, INFECTED, BLEEDING}
-    public PlayerState playerState;
 
     // Player details
     public float maxStamina;
@@ -38,10 +36,10 @@ public class Player : Character {
 
 	void Start () {
         inv = new Inventory(ConstantVariables.INVENTORYSLOTS);
-        shootScript = this.GetComponent<Shooter>();
-        movementScript = this.GetComponent<PlayerMovement>();
+        shootScript = GetComponent<Shooter>();
+        movementScript = GetComponent<PlayerMovement>();
 
-        playerState = PlayerState.HEALTHY;
+        state = CharacterState.HEALTHY;
 	}
 
     public void FixedUpdate()
@@ -50,26 +48,30 @@ public class Player : Character {
     }
 
     // Update is called once per frame
-    void Update () {
+    private void Update () {
+        // Using the gun
         ShootingCheck();
+
+        // Take Medicine
+        TakeMedicineCheck();
 
         /* If player is infected the player will lose stamina. If player is
         * healthy, they'll slowly regain stamina.
         */
-        switch(playerState){
-            case PlayerState.HEALTHY:
+        switch (state){
+            case CharacterState.HEALTHY:
                 if(currStamina < maxStamina+1)
                     currStamina += Time.deltaTime;
                 break;
-            case PlayerState.INFECTED:
+            case CharacterState.INFECTED:
                 if(currStamina > 0)
                     if (!LoseStamina(1f))
                     {
                         // Player will die. I guess?
                     }
                 break;
-            case PlayerState.BLEEDING:
-                takeDamage(1f);
+            case CharacterState.BLEEDING:
+                TakeDamage(1f);
                 break;
             default:
                 Debug.Log("Player isn't in either state. Something has gone wrong.");
@@ -77,31 +79,6 @@ public class Player : Character {
         }
 
 	}
-
-    public void UseItem()
-    {
-        if (heldItem == null)
-            return;
-
-        if(heldItem == inv.FindItemById(6)) // Gun
-            ShootingCheck();
-
-        if (heldItem == inv.FindItemById(9)) // Sickle
-            HarvestCheck();
-
-        if (heldItem == inv.FindItemById(1)) // Fodder
-            FeedCheck();
-
-        if (heldItem == inv.FindItemById(3)) // Medicine
-            TakeMedicineCheck();
-
-        if (heldItem == inv.FindItemById(3)) // Medicine
-            GiveMedicineCheck();
-
-        if (heldItem == inv.FindItemById(4)) // Wood
-            FixFenceCheck();
-
-    }
         
     /* Checks to see if the player is holding the gun, and if there are
      * any bullets, the player will shoot. Player loses stamina and a bullet from
@@ -134,11 +111,41 @@ public class Player : Character {
     public void FeedCheck()
     {
         // TODO
+
+        if (heldItem == null)
+            return;
+
+        if (heldItem != inv.FindItemById(2))
+            return;
+
+        if (inv.FindItemById(2).Value > 0)
+        {
+            LoseStamina(5f);
+            inv.RemoveQuantity(2,1);
+        }
+ 
     }
 
     public void TakeMedicineCheck()
     {
-        // TODO
+        if (heldItem == null)
+            return;
+
+        if (heldItem != inv.FindItemById(4))
+            return;
+
+        if (inv.FindItemById(4).Value > 0)
+        {
+            interaction.Interaction(4);
+            if (interaction.isUsingItem)
+            {
+                RegainHealth(50f);
+                LoseStamina(5f);
+                inv.RemoveQuantity(4, 1);
+                interaction.isUsingItem = false;
+            }
+
+        }
     }
 
     public void GiveMedicineCheck()
@@ -147,6 +154,11 @@ public class Player : Character {
     }
 
     public void FixFenceCheck()
+    {
+        // TODO
+    }
+
+    public void PlantSeedsCheck()
     {
         // TODO
     }

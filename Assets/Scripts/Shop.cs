@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -112,7 +112,7 @@ public class Shop : MonoBehaviour {
 
     // testing iventory management.
     public void TESTCASE(){
-        inv.RemoveItem(1);
+        inv.RemoveItemById(1);
         inv.AddQuantity(2,50);
         inv.PrintInventory();
     }
