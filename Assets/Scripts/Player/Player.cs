@@ -28,21 +28,21 @@ public class Player : Character {
 
     // Player inventory
     public ItemContainer heldItem;
-    public Inventory inv;
+    public InventoryManagement inv;
 
     public Shooter shootScript;
     public PlayerMovement movementScript;
     public PlayerInteraction interaction;
 
-	void Start () {
-        inv = new Inventory(ConstantVariables.INVENTORYSLOTS);
+	private void Start () {
+        inv = new InventoryManagement(ConstantVariables.INVENTORYSLOTS);
         shootScript = GetComponent<Shooter>();
         movementScript = GetComponent<PlayerMovement>();
 
         state = CharacterState.HEALTHY;
 	}
 
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         movementScript.Movement(characterSpeed);
     }
@@ -60,12 +60,12 @@ public class Player : Character {
         */
         switch (state){
             case CharacterState.HEALTHY:
-                if(currStamina < maxStamina+1)
+                if(currStamina <= maxStamina)
                     currStamina += Time.deltaTime;
                 break;
             case CharacterState.INFECTED:
                 if(currStamina > 0)
-                    if (!LoseStamina(1f))
+                    if (!LoseStamina(1f * Time.deltaTime))
                     {
                         // Player will die. I guess?
                     }

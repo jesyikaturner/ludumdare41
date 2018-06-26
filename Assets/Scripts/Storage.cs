@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour {
 
-    public Inventory inv;
+    public InventoryManagement inv;
 
 	// Use this for initialization
 	void Start () {
-        inv = new Inventory(ConstantVariables.INVENTORYSLOTS);
+        inv = new InventoryManagement(ConstantVariables.INVENTORYSLOTS);
 	}
 
     public bool Withdraw(Player p, int id, int amount){

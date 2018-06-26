@@ -1920,6 +1920,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 618477261}
+--- !u!114 &647581228 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114042735036064240, guid: 3d5b599a78b544fcda04c1e824a6df23,
+    type: 2}
+  m_PrefabInternal: {fileID: 1765534279}
+  m_Script: {fileID: 11500000, guid: ce2663a942fab49a98f4e97ed5c4f61b, type: 3}
 --- !u!1 &658832396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2155,6 +2161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 727758353}
   - component: {fileID: 727758354}
+  - component: {fileID: 727758355}
   m_Layer: 0
   m_Name: MANAGER
   m_TagString: Untagged
@@ -2189,7 +2196,21 @@ MonoBehaviour:
   state: 0
   p: {fileID: 0}
   s: {fileID: 0}
+  testShop: {fileID: 0}
   isPaused: 0
+--- !u!114 &727758355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 727758352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a9f8b132b923043af1226f4f40a871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 647581228}
+  s: {fileID: 0}
 --- !u!1 &733819060
 GameObject:
   m_ObjectHideFlags: 0
