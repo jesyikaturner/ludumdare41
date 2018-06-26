@@ -1,18 +1,18 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Inventory Management
 
-public class Inventory {
+public class InventoryManagement {
 
     public ItemContainer[] items;
 
-    public Inventory(){
+    public InventoryManagement(){
         items = new ItemContainer[ConstantVariables.INVENTORYSLOTS];
     }
 
-    public Inventory(int slots){
+    public InventoryManagement(int slots){
         items = new ItemContainer[slots];
     }
 
@@ -42,13 +42,30 @@ public class Inventory {
     }
 
     // add quantity to already existing item
-    public bool AddQuantity(int id, int quantity){
+    public bool AddQuantity(int id, int quantity)
+    {
         ItemContainer i = FindItemById(id);
-        if(i != null){
+        if(i != null)
+        {
             i.Value += quantity;
             return true;
         }
         return false;
+    }
+
+    // better version of add quantity
+    public void AddQuantityByContainer(ItemContainer itemToAdd, int amount)
+    {
+        ItemContainer item = FindItemByContainer(itemToAdd);
+        if (item != null)
+        {
+            item.Value += amount;
+        }
+        else
+        {
+            itemToAdd.Value = amount;
+            AddItem(itemToAdd);
+        }
     }
 
     /*
@@ -62,17 +79,20 @@ public class Inventory {
      * Since the item containers aren't in a static public array, I have to reference the ID 
      * poistion I put them in when creating the array.
      */ 
-    public ItemContainer FindItemById(int id){
-        foreach(ItemContainer obj in items){
-            if(obj != null && obj.Id == id){
-                return obj;
-            }
+    public ItemContainer FindItemById(int id)
+    {
+        for(int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null && items[i].Id == id)
+                return items[i];
         }
         return null;
+
     }
 
     // Finds by the object and returns it if it exists.
-    public ItemContainer FindItemByContainer(ItemContainer item){
+    public ItemContainer FindItemByContainer(ItemContainer item)
+    {
         foreach(ItemContainer obj in items){
             if (obj == item)
                 return obj;
@@ -81,7 +101,8 @@ public class Inventory {
     }
 
     // Gets whatever item is at that index in the inventory array.
-    public ItemContainer GetItemFromIndex(int index){
+    public ItemContainer GetItemFromIndex(int index)
+    {
         return items[index];
     }
 
@@ -100,7 +121,8 @@ public class Inventory {
      * -----------
      */
 
-    public bool RemoveItemById(int id){
+    public bool RemoveItemById(int id)
+    {
         for(int i = 0; i < items.Length; i++){
             if(items[i].Id == id){
                 items[i] = null;
@@ -114,29 +136,45 @@ public class Inventory {
      * by id. If there aren't any items left in the inventory,
      * the item is removed.
      */ 
-    public bool RemoveQuantity(int id, int quantity){
-        ItemContainer i = FindItemById(id);
-        if(i != null){
-            if(i.Value > 0){
-               i.Value -= quantity;
-                return true;
-            }else{
-                RemoveItemById(id);
+    public bool RemoveQuantity(int id, int quantity)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if(items[i] != null && items[i].Id == id)
+            {
+                if(quantity > items[i].Value)
+                    return false;
+
+                if(items[i].Value == quantity)
+                {
+                    items[i] = null;
+                    return true;
+                }
+
+                if(items[i].Value > 0)
+                {
+                    items[i].Value -= quantity;
+                    return true;
+                }
             }
         }
         return false;
     }
 
     // Removes all items from the inventory
-    public void RemoveAll(){
-        for(int i = 0; i < items.Length; i++){
+    public void RemoveAll()
+    {
+        for(int i = 0; i < items.Length; i++)
+        {
             items[i] = null;
         }
     }
 
     // for testing purposes
-    public void PrintInventory(){
-        foreach(ItemContainer obj in items){
+    public void PrintInventory()
+    {
+        foreach(ItemContainer obj in items)
+        {
             if(obj != null)
                 Debug.Log(obj.PrintToString);
         }

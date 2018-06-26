@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour
 
     public Player p;
     public Shop s;
+    public TestCaseShop testShop;
 
     public Queue enemyQueue;
     public Queue animalQueue;
@@ -25,10 +26,20 @@ public class Manager : MonoBehaviour
         // Setting up item database and shop.
         itemList = new List<Item>();
         CreateItemDatabase();
-        CreateShop();
+
+       //CreateShop();
 
         // Adding necessary items to the player's inventory
         SetupPlayerInventory();
+
+         //Testing test shop.
+        if (GetComponent<TestCaseShop>())
+        {
+            testShop = GetComponent<TestCaseShop>();
+            testShop.SetupTestShop(itemList);
+            testShop.TestPlayerBuy();
+            testShop.TestPlayerSell();
+        }
 
         state = States.GAME;
     }
@@ -66,18 +77,14 @@ public class Manager : MonoBehaviour
         shop.transform.SetParent(this.transform);
         shop.AddComponent<Shop>();
         s = shop.GetComponent<Shop>();
-        s.SetItemList(itemList);
-
-        s.CreatePossibleStock();
-        s.Stock();
-        s.inv.PrintInventory();
+        s.SetupShop(itemList);
     }
 
     public void SetupPlayerInventory()
     {
-        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[5], 1));
-        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[0], 10));
-        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[9], 1));
+        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[5], 1)); // gun
+        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[0], 10)); // bullets
+        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[9], 1)); // sickle
 
     }
 

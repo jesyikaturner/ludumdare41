@@ -10,23 +10,35 @@ public class Shop : MonoBehaviour {
      */
 
     private List<Item> items; // A copy of the item list database.
-    public List<ItemContainer> possibleStock;
-    public Inventory inv;
+    public List<ItemContainer> possibleStock; // a list of items that can be chosen to be added to the inventory
+    public InventoryManagement inv; // the shop's current inventory that is stocked.
 
-    public Shop(){
-        inv = new Inventory(ConstantVariables.INVENTORYSLOTS);
+    public Shop()
+    {
+        inv = new InventoryManagement(ConstantVariables.INVENTORYSLOTS);
         possibleStock = new List<ItemContainer>();
     }
 
-    // Public setter for the item list database, so the shop pull from the list to populate the store.
-    public void SetItemList(List<Item> itemList)
+    public void SetupShop(List<Item> itemList)
     {
         items = itemList;
+        CreatePossibleStock();
+        Stock();
+        inv.PrintInventory();
     }
 
     // player selling an item - takes an reference of the player to access their variables
-    public bool SellItem(Player p, int id, int amount){
-        if(p.inv.RemoveQuantity(id,amount)){
+    public bool SellItem(Player p, int id, int amount)
+    {
+        // If the player is trying to sell key items, don't let them!
+        if (p.inv.FindItemById(id).Price == 0)
+        {
+            Debug.Log("GUI - Tell the player they were unable to sell the item.");
+            return false;
+        }
+
+        if(p.inv.RemoveQuantity(id,amount))
+        {
             // Sell the item for half it's price.
             p.currMoney += inv.FindItemById(id).Price/2;
             // Add that item quantity to the shop.
@@ -34,14 +46,32 @@ public class Shop : MonoBehaviour {
             Debug.Log("GUI - Tell player they sold the items.");
             return true;
         }else{
-            Debug.Log("GUI - Tell the player they were unable to sell the items");
+            Debug.Log("GUI - Tell the player they were unable to sell the item.");
             return false;
         }
     }
 
     // player buying an item - takes an reference of the player to access their variables
-    public bool BuyItem(Player p, int id){
-        // TODO
+    public bool BuyItem(Player p, int id, int amount)
+    {
+        // work out how much it costs then compare with player's money
+        // if the total is greater than the player's money, don't do anything.
+        int total = inv.FindItemById(id).Price * amount;
+        if (total > p.currMoney)
+        {
+            Debug.Log(string.Format("Couldn't buy {0} amount of item id: {1}. Player doesn't have enough money!",amount,id));
+            return false;
+        }
+
+        if (inv.RemoveQuantity(id, amount))
+        {
+
+            ItemContainer item = inv.FindItemById(id);
+            p.inv.AddQuantityByContainer(item, amount);
+            p.currMoney -= total;
+            return true;
+        }
+        Debug.Log(string.Format("Couldn't buy {0} amount of item id: {1}. Shop doesn't have enough in stock!", amount, id));
         return false;
     }
 
@@ -50,15 +80,20 @@ public class Shop : MonoBehaviour {
      * Chooses one special item and four regular. Adds them to
      * shop inventory.
     */
-    public void Stock(){
+    private void Stock()
+    {
         List<ItemContainer> regular = new List<ItemContainer>();
         List<ItemContainer> special = new List<ItemContainer>();
 
-        foreach(ItemContainer ic in possibleStock){
-            if(ic.Price >= 50){
+        foreach(ItemContainer ic in possibleStock)
+        {
+            if(ic.Price >= 50)
+            {
                 special.Add(ic);
                 //Debug.Log("Special" + ic.PrintToString());
-            }else{
+            }
+            else
+            {
                 regular.Add(ic);
                 //Debug.Log("Regular" + ic.PrintToString());
             }
@@ -74,7 +109,8 @@ public class Shop : MonoBehaviour {
     // Randomly picks items from the list and adds them to the inventory.
     private void RandomAdd(List<ItemContainer> itemToAdd, int howMany){
         int random = Random.Range(0,itemToAdd.Count);
-        for(int i = 0; i < howMany; i++){
+        for(int i = 0; i < howMany; i++)
+        {
             //  Picks a random item
             ItemContainer temp = itemToAdd[random];
 
@@ -82,7 +118,8 @@ public class Shop : MonoBehaviour {
              *  If the item is already in the inventory, then randomly pick another item
              *  until its an item that doesn't exist in the inventory already.
              */
-            while(inv.FindItemByContainer(temp) != null){
+            while(inv.FindItemByContainer(temp) != null)
+            {
                 random = Random.Range(0,itemToAdd.Count);
                 temp = itemToAdd[random];
                 if(inv.FindItemByContainer(temp) == null)
@@ -95,25 +132,49 @@ public class Shop : MonoBehaviour {
     }
 
     // Clears inventory then adds more stock.
-    public void Restock(){
+    public void Restock()
+    {
         inv.RemoveAll();
         Stock();
     }
-        
-    public void CreatePossibleStock(){
-        foreach(Item item in items){
-            if(item.Price < 50 && item.Price > 0){
+     
+    // adding quantities to the stock
+    private void CreatePossibleStock()
+    {
+        foreach(Item item in items)
+        {
+            if(item.Price < 50 && item.Price > 0)
+            {
                 possibleStock.Add(UtilityMethods.createItemContainer(item,Random.Range(20,40)));
-            }else if (item.Price >= 50){
+            }
+            else if (item.Price >= 50)
+            {
                 possibleStock.Add(UtilityMethods.createItemContainer(item,Random.Range(1,5)));
             }
         }
     }
 
-    // testing iventory management.
-    public void TESTCASE(){
-        inv.RemoveItemById(1);
-        inv.AddQuantity(2,50);
+    /*
+     * ------------
+     * TESTING SHOP
+     * ------------
+     */ 
+
+    // setting up testing shop.
+    public void SetupTestShop(List<Item> itemList)
+    {
+        items = itemList;
+        CreatePossibleStock();
+        SetStock();
         inv.PrintInventory();
+    }
+
+    // Hard sets stocks for the shop - for testing.
+    public void SetStock()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            inv.AddItem(possibleStock[i]);
+        }
     }
 }
