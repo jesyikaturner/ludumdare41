@@ -103,7 +103,15 @@ public class InventoryManagement {
     // Gets whatever item is at that index in the inventory array.
     public ItemContainer GetItemFromIndex(int index)
     {
-        return items[index];
+        if (items[index] != null)
+            return items[index];
+        else
+            return null;
+    }
+
+    public int GetInventorySize()
+    {
+        return items.Length;
     }
 
     public int GetItemValueFromIndex(int index)

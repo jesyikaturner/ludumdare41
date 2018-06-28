@@ -38,7 +38,6 @@ public class Player : Character {
         inv = new InventoryManagement(ConstantVariables.INVENTORYSLOTS);
         shootScript = GetComponent<Shooter>();
         movementScript = GetComponent<PlayerMovement>();
-
         state = CharacterState.HEALTHY;
 	}
 
@@ -170,6 +169,18 @@ public class Player : Character {
         }else{
             Debug.Log("Character passes out or is unable to move til stamina refills");
             return false;
+        }
+    }
+
+    public void AddMoney(int amount)
+    {
+        if(currMoney == 0)
+        {
+            currMoney = amount;
+        }
+        else
+        {
+            currMoney += amount;
         }
     }
      

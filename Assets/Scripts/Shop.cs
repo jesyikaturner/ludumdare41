@@ -30,25 +30,37 @@ public class Shop : MonoBehaviour {
     // player selling an item - takes an reference of the player to access their variables
     public bool SellItem(Player p, int id, int amount)
     {
-        // If the player is trying to sell key items, don't let them!
-        if (p.inv.FindItemById(id).Price == 0)
+        ItemContainer playerItem = p.inv.FindItemById(id);
+        ItemContainer shopItem = inv.FindItemById(id);
+
+        // if the item the player is trying to sell doesn't exist. then return an error.
+        if(playerItem == null)
         {
-            Debug.Log("GUI - Tell the player they were unable to sell the item.");
+            //Debug.Log("ERROR: Item doesn't exist.");
             return false;
         }
 
-        if(p.inv.RemoveQuantity(id,amount))
+        // if the player is trying to sell a key item, dont let them.
+        if(playerItem.Price == 0)
         {
-            // Sell the item for half it's price.
-            p.currMoney += inv.FindItemById(id).Price/2;
-            // Add that item quantity to the shop.
-            inv.AddQuantity(id, amount);
-            Debug.Log("GUI - Tell player they sold the items.");
-            return true;
-        }else{
-            Debug.Log("GUI - Tell the player they were unable to sell the item.");
+            //Debug.Log(string.Format("{0} Cannot be sold!",playerItem.Name));
             return false;
         }
+
+        // selling the item
+        if (p.inv.RemoveQuantity(playerItem.Id, amount))
+        {
+            p.AddMoney((playerItem.Price / 2)*amount);
+            if(shopItem != null)
+            {
+                inv.AddQuantity(shopItem.Id, amount);
+                //Debug.Log(string.Format("{0} added to shop stock!",playerItem.Name));
+            }
+            //Debug.Log(string.Format("Player successfully sold {0}!", playerItem.Name));
+            return true;
+        }
+        //Debug.Log(string.Format("Player couldn't sell {0}.", playerItem.Name));
+        return false;
     }
 
     // player buying an item - takes an reference of the player to access their variables
@@ -90,12 +102,10 @@ public class Shop : MonoBehaviour {
             if(ic.Price >= 50)
             {
                 special.Add(ic);
-                //Debug.Log("Special" + ic.PrintToString());
             }
             else
             {
                 regular.Add(ic);
-                //Debug.Log("Regular" + ic.PrintToString());
             }
         }
 

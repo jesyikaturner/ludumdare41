@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 93116640}
   - component: {fileID: 93116639}
   m_Layer: 5
-  m_Name: Medicine_IMG
+  m_Name: ICON_Item4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,7 +283,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618477262}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 131707717}
   - component: {fileID: 131707716}
   m_Layer: 5
-  m_Name: Seeds_INPUT
+  m_Name: INPUT_Item3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ RectTransform:
   - {fileID: 1096208537}
   - {fileID: 14755936}
   m_Father: {fileID: 618477262}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -411,7 +411,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1175482058}
-        m_MethodName: Seeds_Field
+        m_MethodName: Item3_Field
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -569,7 +569,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 0
 --- !u!222 &147504684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1335,6 +1335,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 460192685}
+--- !u!1 &464786290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 464786291}
+  - component: {fileID: 464786293}
+  - component: {fileID: 464786292}
+  m_Layer: 5
+  m_Name: TXT_Warning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &464786291
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 464786290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 618477262}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -128.9}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &464786292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 464786290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &464786293
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 464786290}
 --- !u!1 &472544632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1420,7 @@ GameObject:
   - component: {fileID: 472544635}
   - component: {fileID: 472544634}
   m_Layer: 5
-  m_Name: Bullets_IMG
+  m_Name: ICON_Item1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1363,7 +1437,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618477262}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1690,7 +1764,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 0
 --- !u!222 &589362140
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1866,19 +1940,20 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2130910225}
   - {fileID: 472544633}
-  - {fileID: 1154140760}
   - {fileID: 1717027454}
-  - {fileID: 1418016054}
   - {fileID: 1430378638}
-  - {fileID: 131707715}
-  - {fileID: 93116638}
-  - {fileID: 1647962359}
   - {fileID: 1604629604}
+  - {fileID: 2130910225}
+  - {fileID: 93116638}
+  - {fileID: 1154140760}
+  - {fileID: 1418016054}
+  - {fileID: 131707715}
+  - {fileID: 1647962359}
   - {fileID: 864695833}
   - {fileID: 753058449}
   - {fileID: 1227771817}
+  - {fileID: 464786291}
   m_Father: {fileID: 1175482057}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2474,7 +2549,7 @@ GameObject:
   - component: {fileID: 753058451}
   - component: {fileID: 753058450}
   m_Layer: 5
-  m_Name: Sell_BUTTON
+  m_Name: BTN_Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2938,7 +3013,7 @@ GameObject:
   - component: {fileID: 864695835}
   - component: {fileID: 864695834}
   m_Layer: 5
-  m_Name: Wood_INPUT
+  m_Name: INPUT_Item5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3014,7 +3089,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1175482058}
-        m_MethodName: Wood_Field
+        m_MethodName: Item5_Field
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3369,7 +3444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 0
 --- !u!222 &1063199429
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3760,7 +3835,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 0
 --- !u!222 &1096208539
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4002,7 +4077,7 @@ GameObject:
   - component: {fileID: 1154140762}
   - component: {fileID: 1154140761}
   m_Layer: 5
-  m_Name: Bullets_INPUT
+  m_Name: INPUT_Item1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4021,7 +4096,7 @@ RectTransform:
   - {fileID: 1615872960}
   - {fileID: 504160069}
   m_Father: {fileID: 618477262}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -4078,7 +4153,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1175482058}
-        m_MethodName: bullet_Field
+        m_MethodName: Item1_Field
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4158,7 +4233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1175482054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4246,7 +4321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc13cc4153f7c4035a08158d1739cc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
+  itemIcons: []
+  outputWarning: {fileID: 0}
+  inputs: []
   player: {fileID: 0}
   shop: {fileID: 0}
 --- !u!1 &1181906445
@@ -4433,7 +4510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc13cc4153f7c4035a08158d1739cc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
+  itemIcons: []
+  outputWarning: {fileID: 0}
+  inputs: []
   player: {fileID: 0}
   shop: {fileID: 0}
 --- !u!1 &1200933190
@@ -4522,7 +4601,7 @@ GameObject:
   - component: {fileID: 1227771819}
   - component: {fileID: 1227771818}
   m_Layer: 5
-  m_Name: Exit_BUTTON
+  m_Name: BTN_Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4963,7 +5042,7 @@ GameObject:
   - component: {fileID: 1418016056}
   - component: {fileID: 1418016055}
   m_Layer: 5
-  m_Name: Fodder_INPUT
+  m_Name: INPUT_Item2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4982,7 +5061,7 @@ RectTransform:
   - {fileID: 589362138}
   - {fileID: 705336600}
   m_Father: {fileID: 618477262}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5039,7 +5118,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1175482058}
-        m_MethodName: Fodder_Field
+        m_MethodName: Item2_Field
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5107,7 +5186,7 @@ GameObject:
   - component: {fileID: 1430378640}
   - component: {fileID: 1430378639}
   m_Layer: 5
-  m_Name: Seeds_IMG
+  m_Name: ICON_Item3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5124,7 +5203,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618477262}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5435,7 +5514,7 @@ GameObject:
   - component: {fileID: 1604629606}
   - component: {fileID: 1604629605}
   m_Layer: 5
-  m_Name: Wood_IMG
+  m_Name: ICON_Item5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5452,7 +5531,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618477262}
-  m_RootOrder: 9
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5633,7 +5712,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 0
 --- !u!222 &1615872962
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5652,7 +5731,7 @@ GameObject:
   - component: {fileID: 1647962361}
   - component: {fileID: 1647962360}
   m_Layer: 5
-  m_Name: Medicine_INPUT
+  m_Name: INPUT_Item4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5671,7 +5750,7 @@ RectTransform:
   - {fileID: 1063199427}
   - {fileID: 1077950150}
   m_Father: {fileID: 618477262}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5728,7 +5807,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1175482058}
-        m_MethodName: Medicine_Field
+        m_MethodName: Item4_Field
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5870,7 +5949,7 @@ GameObject:
   - component: {fileID: 1717027456}
   - component: {fileID: 1717027455}
   m_Layer: 5
-  m_Name: Fodder_IMG
+  m_Name: ICON_Item2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5887,7 +5966,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618477262}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -6537,6 +6616,11 @@ Prefab:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114042735036064240, guid: 3d5b599a78b544fcda04c1e824a6df23,
+        type: 2}
+      propertyPath: currMoney
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d5b599a78b544fcda04c1e824a6df23, type: 2}
   m_IsPrefabParent: 0
@@ -6755,7 +6839,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 618477262}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
