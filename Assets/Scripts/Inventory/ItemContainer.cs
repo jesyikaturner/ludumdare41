@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,15 @@ public class ItemContainer : Item {
     // // Constructor to populate item container object extending the item object's constructor
     public ItemContainer (string name, int id, int value, int price) : base(name,id,price){
         Value = value;
+    }
+
+    // Clone another Item Container
+    public ItemContainer(ItemContainer other)
+    {
+        Name = other.Name;
+        Id = other.Id;
+        Value = other.Value;
+        Price = other.Price;
     }
 
     // for testing purposes

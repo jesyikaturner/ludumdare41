@@ -27,19 +27,20 @@ public class Manager : MonoBehaviour
         itemList = new List<Item>();
         CreateItemDatabase();
 
-       //CreateShop();
+       CreateShop();
 
         // Adding necessary items to the player's inventory
         SetupPlayerInventory();
 
          //Testing test shop.
+         /*
         if (GetComponent<TestCaseShop>())
         {
             testShop = GetComponent<TestCaseShop>();
             testShop.SetupTestShop(itemList);
             testShop.TestPlayerBuy();
             testShop.TestPlayerSell();
-        }
+        }*/
 
         state = States.GAME;
     }
