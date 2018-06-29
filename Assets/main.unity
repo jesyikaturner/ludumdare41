@@ -4228,7 +4228,7 @@ GameObject:
   - component: {fileID: 1175482054}
   - component: {fileID: 1175482058}
   m_Layer: 5
-  m_Name: SellHud
+  m_Name: ShopHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4321,8 +4321,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc13cc4153f7c4035a08158d1739cc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInvIcons: []
+  shopInvIcons: []
   itemIcons: []
   outputWarning: {fileID: 0}
+  shopText: {fileID: 0}
   inputs: []
   player: {fileID: 0}
   shop: {fileID: 0}
@@ -4510,8 +4513,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc13cc4153f7c4035a08158d1739cc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInvIcons: []
+  shopInvIcons: []
   itemIcons: []
   outputWarning: {fileID: 0}
+  shopText: {fileID: 0}
   inputs: []
   player: {fileID: 0}
   shop: {fileID: 0}
@@ -6878,7 +6884,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SELL
+  m_Text: 'TEMP
 
 '
 --- !u!222 &2130910227
