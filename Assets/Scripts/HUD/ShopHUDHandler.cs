@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class ShopHUDHandler : MonoBehaviour {
 
-    /*
-     * TODO create quantity fields and item images from shop inventory.
-     * TODO create inventory fields and item images from player inventory.
-     */
+    public Sprite[] playerInvIcons;
+    public Sprite[] shopInvIcons;
 
     public InventoryManagement currInv;
     public InventoryManagement itemsToSell;
     public Image[] itemIcons;
     public Text outputWarning;
+    public Text shopText;
     public InputField[] inputs;
 
     public Player player;
@@ -34,10 +33,14 @@ public class ShopHUDHandler : MonoBehaviour {
         // getting the output warning text.
         outputWarning = GameObject.Find("TXT_Warning").GetComponent<Text>();
 
+        // getting the player and the shop
         player = GameObject.Find("Player").GetComponent<Player>();
         shop = GameObject.Find("Shop").GetComponent<Shop>();
 
+        // setting the current inventory to display to the player
         currInv = player.inv;
+
+        // an inventory to hold the items the player chooses to sell.
         itemsToSell = new InventoryManagement();
 	}
 	
@@ -45,6 +48,32 @@ public class ShopHUDHandler : MonoBehaviour {
 	void Update () {
         
 	}
+
+    public void Button_SetShopSell()
+    {
+        if(shopText != null)
+            shopText.text = "SELL";
+        currInv = player.inv;
+
+        for(int i = 0; i < itemIcons.Length; i++)
+        {
+            itemIcons[i].sprite = playerInvIcons[i];
+        }
+
+    }
+
+    public void Button_SetShopBuy()
+    {
+        if (shopText != null)
+            shopText.text = "BUY";
+        currInv = shop.inv;
+
+        for (int i = 0; i < itemIcons.Length; i++)
+        {
+            itemIcons[i].sprite = shopInvIcons[i];
+        }
+    }
+
 
     // parsing the text entered into the input fields then cloning the item from the player inventory.
     // the cloned items quantity is changed to the input amount and then its added to the items to sell
@@ -120,23 +149,29 @@ public class ShopHUDHandler : MonoBehaviour {
      * -----------
      */ 
 
-    public void Sell_Button(){
-        bool sold = false;
-
+    public void Sell_Button()
+    {
+        // if theres nothing in the items to sell inventory do nothing.
         if (itemsToSell.GetInventorySize() < 1)
             return;
 
         for(int i = 0; i< itemsToSell.GetInventorySize(); i++)
         {
+            // check if the item exists
             ItemContainer item = itemsToSell.GetItemFromIndex(i);
             if (item != null)
             {
-                sold = shop.SellItem(player, item.Id, item.Value);
+                // check if it actually sold.
+                bool sold = shop.SellItem(player, item.Id, item.Value);
+                // tell player if it didnt sell.
                 if (!sold)
                     outputWarning.text += string.Format("Item: {0} didn't sell.\n", item.Name);
             }
         }
+        // clear the items to sell inventory
         itemsToSell.RemoveAll();
+
+        // clear all the inputs
         foreach (InputField input in inputs)
         {
             input.text = "";
