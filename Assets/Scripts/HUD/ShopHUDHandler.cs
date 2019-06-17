@@ -83,6 +83,11 @@ public class ShopHUDHandler : MonoBehaviour {
         outputWarning.text = "";
         ItemContainer item = currInv.GetItemFromIndex(index);
 
+        if(text == "" || text == "0")
+        {
+            return false;
+        }
+
         if(item == null)
         {
             outputWarning.text = "ERROR: Item doesn't exist?";
