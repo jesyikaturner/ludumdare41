@@ -10,9 +10,10 @@ public class Manager : MonoBehaviour
 
     public List<Item> itemList; // keeps track of items
 
-    public Player p;
+    public Player player;
     public Shop s;
     public TestCaseShop testShop;
+    public ImageManager im;
 
     public Queue enemyQueue;
     public Queue animalQueue;
@@ -21,13 +22,13 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        p = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.Find("Player").GetComponent<Player>();
 
         // Setting up item database and shop.
         itemList = new List<Item>();
         CreateItemDatabase();
 
-       CreateShop();
+        CreateShop();
 
         // Adding necessary items to the player's inventory
         SetupPlayerInventory();
@@ -47,24 +48,18 @@ public class Manager : MonoBehaviour
 
     public void CreateItemDatabase()
     {
-        // NAME : ID : PRICE
-        itemList.Add(CreateItem("Bullets", 1, 5));
-        itemList.Add(CreateItem("Fodder", 2, 2));
-        itemList.Add(CreateItem("Seeds", 3, 1));
-        itemList.Add(CreateItem("Medicine", 4, 100));
-        itemList.Add(CreateItem("Wood", 5, 10));
-        itemList.Add(CreateItem("Gun", 6, 0)); // Necessary Player Item
-        itemList.Add(CreateItem("Growth Potion", 7, 50));
-        itemList.Add(CreateItem("Stamina Potion", 8, 25));
-        itemList.Add(CreateItem("Bandages", 9, 25));
-        itemList.Add(CreateItem("Sickle", 10, 0)); // Necessary Player Item
+        // NAME : ID : PRICE : IMAGE
+        itemList.Add(new Item("Bullets", 1, 5, im.bullet));
+        itemList.Add(new Item("Fodder", 2, 2, im.fodder));
+        itemList.Add(new Item("Seeds", 3, 1, im.seeds));
+        itemList.Add(new Item("Medicine", 4, 100, im.medicine));
+        itemList.Add(new Item("Wood", 5, 10, im.wood));
+        itemList.Add(new Item("Gun", 6, 0, im.gun)); // Necessary Player Item
+        itemList.Add(new Item("Growth Potion", 7, 50, im.growthPot));
+        itemList.Add(new Item("Stamina Potion", 8, 25, im.stamPot));
+        itemList.Add(new Item("Bandages", 9, 25, im.bandages));
+        itemList.Add(new Item("Sickle", 10, 0, im.sickle)); // Necessary Player Item
     }
-
-    private Item CreateItem(string name, int id, int price)
-    {
-        return new Item(name, id, price);
-    }
-
 
     public void Menu()
     {
@@ -83,9 +78,9 @@ public class Manager : MonoBehaviour
 
     public void SetupPlayerInventory()
     {
-        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[5], 1)); // gun
-        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[0], 10)); // bullets
-        p.inv.AddItem(UtilityMethods.createItemContainer(itemList[9], 1)); // sickle
+        player.inv.AddItem(UtilityMethods.createItemContainer(itemList[5], 1)); // gun
+        player.inv.AddItem(UtilityMethods.createItemContainer(itemList[0], 10)); // bullets
+        player.inv.AddItem(UtilityMethods.createItemContainer(itemList[9], 1)); // sickle
 
     }
 
@@ -94,7 +89,8 @@ public class Manager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.P))
         {
-            PauseToggle();
+            isPaused = !isPaused;
+            Debug.Log("Pause has been toggled.");
         }
 
         switch (state)
@@ -116,14 +112,6 @@ public class Manager : MonoBehaviour
                 break;
         }
     }
-
-    public void PauseToggle()
-    {
-        if (isPaused)
-            isPaused = false;
-        else
-            isPaused = true;
-    }
 }
 
 public class ConstantVariables {
@@ -133,6 +121,6 @@ public class ConstantVariables {
 
 public class UtilityMethods {
     public static ItemContainer createItemContainer(Item item, int value){
-        return new ItemContainer(item.Name, item.Id, value, item.Price);
+        return new ItemContainer(item.Name, item.Id, value, item.Price, item.Image);
     }
 }

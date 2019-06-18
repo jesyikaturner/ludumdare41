@@ -12,7 +12,7 @@ public class ItemContainer : Item {
     }
 
     // // Constructor to populate item container object extending the item object's constructor
-    public ItemContainer (string name, int id, int value, int price) : base(name,id,price){
+    public ItemContainer (string name, int id, int value, int price, Sprite image) : base(name,id,price,image){
         Value = value;
     }
 

@@ -37,12 +37,12 @@ public class ShopHUDHandler : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<Player>();
         shop = GameObject.Find("Shop").GetComponent<Shop>();
 
-        // setting the current inventory to display to the player
-        currInv = player.inv;
-
         // an inventory to hold the items the player chooses to sell.
         itemsToSell = new InventoryManagement();
-	}
+
+        // setting the current inventory to display to the player
+        Button_SetShopSell();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,7 +57,7 @@ public class ShopHUDHandler : MonoBehaviour {
 
         for(int i = 0; i < itemIcons.Length; i++)
         {
-            itemIcons[i].sprite = playerInvIcons[i];
+            itemIcons[i].sprite = currInv.GetItemFromIndex(i).Image;
         }
 
     }

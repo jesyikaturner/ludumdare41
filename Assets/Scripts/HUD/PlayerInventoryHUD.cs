@@ -14,6 +14,9 @@ public class PlayerInventoryHUD : MonoBehaviour {
         p = GameObject.Find("Player").GetComponent<Player>();
         texts = new List<Text>();
         for(int i = 0; i < 5; i++){
+            // setting the inventory images
+            if(p.inv.GetItemFromIndex(i) != null)
+                transform.GetChild(0).GetChild(i).GetComponent<Button>().image.sprite = p.inv.GetItemFromIndex(i).Image;
             // Getting the Quantity Child and adding its text object to the list
             texts.Add(transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>());
         }
