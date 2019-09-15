@@ -63,27 +63,28 @@ public class Shop : MonoBehaviour {
         return false;
     }
 
-    // player buying an item - takes an reference of the player to access their variables
-    public bool BuyItem(Player p, int id, int amount)
+    // buy an item - needs player to access their properties, the id of the item being bought, and amount of the item being bought
+    public bool BuyItem(Player player, int id, int amount)
     {
-        // work out how much it costs then compare with player's money
-        // if the total is greater than the player's money, don't do anything.
+        // Get the total value of the item being bought (price * amount).
         int total = inv.FindItemById(id).Price * amount;
-        if (total > p.currMoney)
+        // Make sure the total money isnt greater than the player's current money
+        if (total > player.currMoney)
         {
-            Debug.Log(string.Format("Couldn't buy {0} amount of item id: {1}. Player doesn't have enough money!",amount,id));
+            //Debug.Log(string.Format("Couldn't buy {0} amount of item id: {1}. Player doesn't have enough money!",amount,id));
+            // Since the player isn't able to buy, return false since buying failed.
             return false;
         }
 
         if (inv.RemoveQuantity(id, amount))
         {
-
             ItemContainer item = inv.FindItemById(id);
-            p.inv.AddQuantityByContainer(item, amount);
-            p.currMoney -= total;
+            player.inv.AddQuantityByContainer(item, amount);
+            player.currMoney -= total;
             return true;
         }
-        Debug.Log(string.Format("Couldn't buy {0} amount of item id: {1}. Shop doesn't have enough in stock!", amount, id));
+
+        //Debug.Log(string.Format("Couldn't buy {0} amount of item id: {1}. Shop doesn't have enough in stock!", amount, id));
         return false;
     }
 

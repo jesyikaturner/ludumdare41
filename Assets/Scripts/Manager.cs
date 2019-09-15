@@ -70,7 +70,8 @@ public class Manager : MonoBehaviour
     public void CreateShop()
     {
         GameObject shop = new GameObject();
-        shop.transform.SetParent(this.transform);
+        shop.transform.SetParent(transform);
+        shop.name = "Shop";
         shop.AddComponent<Shop>();
         s = shop.GetComponent<Shop>();
         s.SetupShop(itemList);
